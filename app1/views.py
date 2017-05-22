@@ -7,5 +7,7 @@ def index(request):
 def test(request):
     return render(request, 'app1/test.html', {})
 
+def test2(request):
+    return render(request, 'app1/test.html', {})
 
 # Create your views here.
