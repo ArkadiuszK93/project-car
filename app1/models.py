@@ -14,3 +14,10 @@ class Samochod(models.Model):
 	nadwozie = models.CharField(max_length=20)
 	kolor = models.CharField(max_length=20)
 	cena =  models.IntegerField()
+
+class Uzytkownik(models.Model):
+	login = models.CharField(max_length=30, unique=True)
+	haslo = models.CharField(max_length=20)
+	imie = models.CharField(max_length=20)
+	nazwisko = models.CharField(max_length=25)
+	telefon = models.IntegerField()
