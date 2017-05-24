@@ -7,7 +7,7 @@
 
     <div class="sam">
 
-    <h3><a href="{% url 'car_detail' pk=car.pk %}">{{ l.marka.nazwa  }} {{ l.model }} {{ l.rok }}</a></h3>
+    <h3><a href="{% url 'car_details' pk=l.pk %}">{{ l.marka.nazwa  }} {{ l.model }} {{ l.rok }}</a></h3>
     <p>Ogłoszenie dodane przez: {{ l.uzytkownik.login}}  </p>
 
     </div>
