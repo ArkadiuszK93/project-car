@@ -9,7 +9,8 @@ def test(request):
     lista = Samochod.objects.all()
     return render(request, 'app1/test.html', {'lista':lista})
 
-def test2(request):
-    return render(request, 'app1/test.html', {})
+def car_detail(request,pk):
+    Samochod.objects.get(pk=pk)
+    return render(request, 'app1/car_detail.html', {})
 
 # Create your views here.

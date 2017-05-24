@@ -1,24 +1,17 @@
-{% load staticfiles %}
-<html>
-    <head>
-        <title>Salon samochodów używanych</title>
-        <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
-        <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
-        <link rel="stylesheet" href="{% static 'css/test.css' %}">
+{% extends 'app1/base.html' %}
 
-    </head>
-    <body>
-        <div>
-            <h1><a href="">Salon samochodów używanych</a></h1>
-        </div>
-        <h2>Lista samochodow:</h2>
-        {% for l in lista %}
 
-         <div>
+{% block content %}
 
-        <h3><a href="">{{ l.marka.nazwa  }} {{ l.model }} {{ l.rok }}</a></h3>
-        <p>Ogłoszenie dodane przez: {{ l.uzytkownik.login}}  </p>
-      </div>
-         {% endfor %}
-    </body>
-</html>
+{% for l in lista %}
+
+    <div class="sam">
+
+    <h3><a href="{% url 'car_detail' pk=car.pk %}">{{ l.marka.nazwa  }} {{ l.model }} {{ l.rok }}</a></h3>
+    <p>Ogłoszenie dodane przez: {{ l.uzytkownik.login}}  </p>
+
+    </div>
+
+{% endfor %}
+
+{% endblock %}

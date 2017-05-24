@@ -1,0 +1,27 @@
+{% load staticfiles %}
+<html>
+    <head>
+        <title>Salon samochodów używanych</title>
+        <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+        <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
+        <link rel="stylesheet" href="{% static 'css/test.css' %}">
+
+    </head>
+    <body>
+        <div class="page-header">
+            <h1><a href="">Salon samochodów używanych</a></h1>
+        </div>
+        <h2>Lista samochodow:</h2>
+
+<div class="content container">
+    <div class="row">
+        <div class="col-md-8">
+
+            {% block content %}
+            {% endblock %}
+
+        </div>
+        </div>
+    </div>
+    </body>
+</html>
