@@ -2,11 +2,11 @@
 
 
 {% block content %}
-
+<h1>Szczegóły ogłoszenia:</h1>
 <h3>  <b>Marka:</b> {{ sam.marka.nazwa }} </h3>
 <h3>  <b>Model:</b>  {{ sam.model }}  </h3>
 
-    <h4> <b> Kontakt: {{sam.uzytkownik.telefon}} </b> </h4>
+    <h3> <b> Kontakt: {{sam.uzytkownik.telefon}} </b> </h3>
     <h6>Ogłoszenie dodane przez: {{ sam.uzytkownik.login}}  </h6>
 
 {% endblock %}

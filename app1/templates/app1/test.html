@@ -2,16 +2,14 @@
 
 
 {% block content %}
-
+<h1>Lista samochodow:</h1>
 {% for l in lista %}
-
     <div class="sam">
 
     <h3><a href="{% url 'car_details' pk=l.pk %}">{{ l.marka.nazwa  }} {{ l.model }} {{ l.rok }}</a></h3>
     <p>Ogłoszenie dodane przez: {{ l.uzytkownik.login}}  </p>
 
     </div>
-
 {% endfor %}
 
 {% endblock %}

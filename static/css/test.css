@@ -3,7 +3,7 @@ h1 a {
 }
 
 body {
-    padding-left: 15px;
+    padding-left: 0px;
 }
 
 
@@ -19,21 +19,31 @@ body {
     text-decoration: none;
 }
 
-.content {
-    margin-left: 40px;
-}
+
 
 h1, h2, h3, h4 {
     font-family: 'Lobster', cursive;
 }
 
-
-.save {
-    float: right;
+h1{
+ margin-left:-30px;
 }
 
-.sam-form textarea, .sam-form input {
+
+.content {
+    margin-left: 40px;
+}
+
+.sam {
+    margin-bottom: 30px;
+}
+
+.post-form textarea, .post-form input {
     width: 100%;
+}
+
+.sam h1 a, .sam h1 a:visited {
+    color: #000000;
 }
 
 .top-menu, .top-menu:hover, .top-menu:visited {
@@ -41,12 +51,4 @@ h1, h2, h3, h4 {
     float: right;
     font-size: 26pt;
     margin-right: 20px;
-}
-
-.sam {
-    margin-bottom: 70px;
-}
-
-.sam h1 a, .sam h1 a:visited {
-    color: #000000;
 }
