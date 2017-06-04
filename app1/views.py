@@ -24,7 +24,7 @@ def car_add(request):
             user = Uzytkownik.objects.get(pk=1)
             car.uzytkownik = user
             car.save()
-            return redirect('car_detail', pk=car.pk)
+            return render(request,'app1/index.html', {})
     else:
         form=CarForm()
         return render(request,'app1/car_add.html',{'form':form})
