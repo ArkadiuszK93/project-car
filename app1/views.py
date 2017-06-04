@@ -1,25 +1,16 @@
 from django.shortcuts import render,get_object_or_404
 from django.http import HttpResponse
-<<<<<<< HEAD
-from .models import Samochod
-=======
 from .models import Samochod,Uzytkownik
 from .forms import CarForm
 from django.shortcuts import redirect
->>>>>>> 9590f429960cfddd7a1bc68402a12228789e1c09
 
 def index(request):
 	#return HttpResponse("Hello World. Index")
 	return render(request,'app1/index.html', {})
 
 def test(request):
-<<<<<<< HEAD
-	lista = Samochod.objects.all()
-	return render(request, 'app1/test.html', {'lista':lista})
-=======
     lista = Samochod.objects.all()
     return render(request, 'app1/test.html', {'lista':lista})
->>>>>>> 9590f429960cfddd7a1bc68402a12228789e1c09
 
 def car_details(request,pk):
     samochod = get_object_or_404(Samochod, pk=pk)

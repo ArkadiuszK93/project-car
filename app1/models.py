@@ -1,15 +1,11 @@
 from django.db import models
 
 class Marka(models.Model):
-	nazwa = models.CharField(max_length=30,unique=True)
+	nazwa = models.CharField(max_length=30)
 	kraj_pochodzenia = models.CharField(max_length=30)
 	def __str__(self):
-<<<<<<< HEAD
-		return self.nazwa
-=======
 	    return self.nazwa
 
->>>>>>> 9590f429960cfddd7a1bc68402a12228789e1c09
 
 class Uzytkownik(models.Model):
 	login = models.CharField(max_length=30, unique=True)
@@ -18,11 +14,7 @@ class Uzytkownik(models.Model):
 	nazwisko = models.CharField(max_length=25)
 	telefon = models.IntegerField()
 	def __str__(self):
-<<<<<<< HEAD
-		return self.login
-=======
 	    return self.login
->>>>>>> 9590f429960cfddd7a1bc68402a12228789e1c09
 
 class Samochod(models.Model):
         paliwo_choices = (
@@ -48,15 +40,7 @@ class Samochod(models.Model):
 	nadwozie = models.CharField(max_length=20,choices=nadwozie_choices)
 	kolor = models.CharField(max_length=20)
 	cena =  models.IntegerField()
-<<<<<<< HEAD
-	uzytkownik = models.ForeignKey(Uzytkownik,default=None)
-	def __str__(self):
-		temp_str = self.marka.nazwa + ' ' + self.model
-		return temp_str
-
-=======
 	uzytkownik = models.ForeignKey(Uzytkownik)
 	def __str__(self):
 	    return self.marka.nazwa + ' ' + self.model
->>>>>>> 9590f429960cfddd7a1bc68402a12228789e1c09
 
