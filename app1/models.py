@@ -17,14 +17,27 @@ class Uzytkownik(models.Model):
 	    return self.login
 
 class Samochod(models.Model):
+        paliwo_choices = (
+        ('Benzyna', 'Benzyna'),
+        ('Diesel', 'Diesel'),
+        ('LPG', 'LPG'),
+    )
+        nadwozie_choices = (
+        ('Kombi', 'Kombi'),
+        ('Sedan', 'Sedan'),
+        ('Hatchback', 'Hatchback'),
+        ('Kabriolet', 'Kabriolet'),
+        ('SUV', 'SUV'),
+        ('Coupe', 'Coupe'),
+    )
 	marka = models.ForeignKey(Marka)
 	model = models.CharField(max_length=30)
 	rok = models.IntegerField()
 	moc = models.IntegerField()
 	pojemnosc = models.IntegerField()
 	przebieg = models.IntegerField()
-	paliwo = models.CharField(max_length=20)
-	nadwozie = models.CharField(max_length=20)
+	paliwo = models.CharField(max_length=20,choices=paliwo_choices)
+	nadwozie = models.CharField(max_length=20,choices=nadwozie_choices)
 	kolor = models.CharField(max_length=20)
 	cena =  models.IntegerField()
 	uzytkownik = models.ForeignKey(Uzytkownik)

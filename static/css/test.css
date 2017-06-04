@@ -38,10 +38,6 @@ h1{
     margin-bottom: 30px;
 }
 
-.post-form textarea, .post-form input {
-    width: 100%;
-}
-
 .sam h1 a, .sam h1 a:visited {
     color: #000000;
 }
