@@ -1,0 +1,34 @@
+<<<<<<< HEAD
+<html>
+    <head>
+        <title>Django Girls blog</title>
+    </head>
+    <body>
+        <div>
+            <h1><a href="">Django Girls Blog</a></h1>
+        </div>
+        {% for l in lista %}
+        {{ l.marka.nazwa }}
+         {{ l.model }}
+         {{ l.uzytkownik.login }}
+        {% endfor %}
+        
+    </body>
+</html>
+=======
+{% extends 'app1/base.html' %}
+
+
+{% block content %}
+<h1>Lista samochodow:</h1>
+{% for l in lista %}
+    <div class="sam">
+
+    <h3><a href="{% url 'car_details' pk=l.pk %}">{{ l.marka.nazwa  }} {{ l.model }} {{ l.rok }}</a></h3>
+    <!-- <p>Ogłoszenie dodane przez: {{ l.uzytkownik.login}}  </p> -->
+
+    </div>
+{% endfor %}
+
+{% endblock %}
+>>>>>>> 9590f429960cfddd7a1bc68402a12228789e1c09
