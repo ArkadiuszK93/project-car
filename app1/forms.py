@@ -1,19 +1,23 @@
 from django import forms
 
-from .models import Samochod,Marka
+from .models import Samochod,Marka,Uzytkownik
 
 class CarForm(forms.ModelForm):
     class Meta:
         model = Samochod
         fields = ('marka', 'model','rok','moc','pojemnosc','przebieg','paliwo','nadwozie','kolor','cena')
         labels = {
-			"moc": "Moc[KM]","pojemnosc":"Pojemnosc[cm3]","przebieg":"Przebieg[km]","cena":"Cena[zł]","paliwo":"Rodzaj paliwa","nadwozie":"Typ nadwozia"
+			"moc": "Moc[KM]","pojemnosc":"Pojemnosc[cm3]","przebieg":"Przebieg[km]","cena":"Cena[zl]","paliwo":"Rodzaj paliwa","nadwozie":"Typ nadwozia"
 		}
+class UserForm(forms.ModelForm):
+    class Meta:
+        model = Uzytkownik
+        exclude = ['user']
 
 class FilterForm(forms.Form):
 	iquery = Samochod.objects.order_by().values_list('marka', flat=True).distinct()
 	#iquery_choices = [('', '----')] + [(id, id ) for id in iquery]
-	iquery_choices = [('', '----')] 
+	iquery_choices = [('', '----')]
 	for id in iquery:
 		obj = Marka.objects.get(pk=id)
 		iquery_choices +=[(id, obj.nazwa )]

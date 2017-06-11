@@ -9,10 +9,11 @@ urlpatterns = [
     url(r'^admin/', admin.site.urls),
     #url(r'^filter/(?P<form>)/$', views.filter, name='car_edit'),
 	url(r'^filter/$', views.car_filter, name='car_filter'),
-	url(r'^$',views.index),
+	url(r'^$',views.index, name ="index"),
 	#url(r'^login/$', auth_views.login, name='login'),
 	url(r'^logout/$', auth_views.logout, {'next_page': '/login'}, name='logout'),
-	url(r'^login/$', auth_views.login,name="login")
+	url(r'^login/$', auth_views.login , name="login"   ),
+	url(r'^user/$', views.user_details, name="user_details")
 
 
     #app1

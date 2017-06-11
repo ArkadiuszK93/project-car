@@ -1,7 +1,7 @@
 from django.shortcuts import render,get_object_or_404
 from django.http import HttpResponse
 from .models import Samochod,Uzytkownik
-from .forms import CarForm,FilterForm
+from .forms import CarForm,FilterForm,UserForm
 from django.shortcuts import redirect
 import pdb
 #pdb.set_trace()
@@ -12,7 +12,7 @@ def index(request):
 
 def test(request):
     #lista = Samochod.objects.all()
-    lista = Samochod.objects.filter(rok__gte=1990)
+    lista = Samochod.objects.all()
     return render(request, 'app1/test.html', {'lista':lista})
 
 def car_details(request,pk):
@@ -24,7 +24,7 @@ def car_add(request):
         form=CarForm(request.POST);
         if form.is_valid():
             car = form.save(commit=False)
-            user = Uzytkownik.objects.get(pk=1)
+            user = Uzytkownik.objects.get(user__username=request.user.username)
             car.uzytkownik = user
             car.save()
             return redirect('test')
@@ -38,10 +38,8 @@ def car_edit(request, pk):
 		form = CarForm(request.POST, instance=car)
 		if form.is_valid():
 			car = form.save(commit=False)
-			user = Uzytkownik.objects.get(pk=1)
-			car.uzytkownik = user
 			car.save()
-			return redirect('car_details', pk=car.pk)
+			return redirect('user_details')
 	else:
 		form = CarForm(instance=car)
 		return render(request, 'app1/car_edit.html', {'form': form})
@@ -49,8 +47,8 @@ def car_edit(request, pk):
 def car_remove(request, pk):
     car = get_object_or_404(Samochod, pk=pk)
     car.delete()
-    return redirect('test')
-    
+    return redirect('user_details')
+
 def car_filter(request):
 	if request.method == "POST":
 		form = FilterForm(request.POST)
@@ -100,4 +98,16 @@ def car_filter(request):
 		form = FilterForm()
 		return render(request,'app1/car_filter.html', {'form': form})
 
-
+def user_details(request):
+    user = Uzytkownik.objects.get(user__username=request.user.username)
+    if request.method == "POST":
+        form = UserForm(request.POST, instance=user)
+        if form.is_valid():
+            us = form.save(commit=False)
+            us.save()
+            return redirect('user_details')
+    else:
+        lista = Samochod.objects.filter(uzytkownik__user__username = request.user.username)
+        form = UserForm(instance=user)
+        return render(request,'app1/user_details.html', {'u': form,'cars': lista})
+    #return render(request,'app1/user_details.html', {'u': user})

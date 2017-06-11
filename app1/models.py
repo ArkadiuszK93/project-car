@@ -1,4 +1,5 @@
 from django.db import models
+from django.contrib.auth.models import User
 
 class Marka(models.Model):
 	nazwa = models.CharField(max_length=30)
@@ -8,13 +9,12 @@ class Marka(models.Model):
 
 
 class Uzytkownik(models.Model):
-	login = models.CharField(max_length=30, unique=True)
-	haslo = models.CharField(max_length=20)
-	imie = models.CharField(max_length=20)
-	nazwisko = models.CharField(max_length=25)
-	telefon = models.IntegerField()
-	def __str__(self):
-	    return self.login
+    Imie = models.CharField(max_length=20,default=None)
+    Nazwisko = models.CharField(max_length=30,default=None)
+    telefon = models.IntegerField()
+    user = models.ForeignKey(User)
+    def __str__(self):
+        return self.user.username
 
 class Samochod(models.Model):
 	paliwo_choices = (
@@ -42,5 +42,5 @@ class Samochod(models.Model):
 	cena =  models.IntegerField()
 	uzytkownik = models.ForeignKey(Uzytkownik)
 	def __str__(self):
-	    return self.marka.nazwa + ' ' + self.model 
+	    return self.marka.nazwa + ' ' + self.model
 
