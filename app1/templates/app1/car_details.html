@@ -1,12 +1,22 @@
 {% extends 'app1/base.html' %}
 
-
 {% block content %}
+<a class="btn btn-default" href="{% url 'car_edit' pk=car.pk %}"><span class="glyphicon glyphicon-pencil"></span></a>
+<a class="btn btn-default"  onclick="return confirm('Na pewno chcesz usunąć swoją ofertę?')" href="{% url 'car_remove' pk=car.pk %}"><span class="glyphicon glyphicon-remove"></span></a>
 <h1>Szczegóły ogłoszenia:</h1>
-<h3>  <b>Marka:</b> {{ sam.marka.nazwa }} </h3>
-<h3>  <b>Model:</b>  {{ sam.model }}  </h3>
+<h3>  <b>Marka:</b> {{ car.marka.nazwa }} </h3>
+<h3>  <b>Model:</b>  {{ car.model }}  </h3>
+<h3>  <b>Rok:</b>  {{ car.rok }}  </h3>
+<h3>  <b>Moc[KM]:</b>  {{ car.moc }}  </h3>
+<h3>  <b>Pojemnosc silnika[cm3]:</b>  {{ car.pojemnosc }}  </h3>
+<h3>  <b>Przebieg[km]:</b>  {{ car.przebieg }}  </h3>
+<h3>  <b>Rozaj paliwa:</b>  {{ car.paliwo }}  </h3>
+<h3>  <b>Typ Nadwozia:</b>  {{ car.nadwozie }}  </h3>
+<h3>  <b>Kolor:</b>  {{ car.kolor }}  </h3>
+<h3>  <b>Cena[zł]:</b>  {{ car.cena }}  </h3>
 
-    <h3> <b> Kontakt: {{sam.uzytkownik.telefon}} </b> </h3>
-    <h6>Ogłoszenie dodane przez: {{ sam.uzytkownik.login}}  </h6>
+
+    <h3> <b> Kontakt: {{car.uzytkownik.telefon}} </b> </h3>
+    <h6>Ogłoszenie dodane przez: {{ car.uzytkownik.login}}  </h6>
 
 {% endblock %}

@@ -6,10 +6,13 @@
 {% for l in lista %}
     <div class="sam">
 
-    <h3><a href="{% url 'car_details' pk=l.pk %}">{{ l.marka.nazwa  }} {{ l.model }} {{ l.rok }}</a></h3>
+    <h3><a href="{% url 'car_details' pk=l.pk %}">{{ l.marka.nazwa  }} {{ l.model }} {{ l.rok }}r
+        {{ l.paliwo }} {{ l.cena }}zł
+        </a></h3>
     <!-- <p>Ogłoszenie dodane przez: {{ l.uzytkownik.login}}  </p> -->
 
     </div>
 {% endfor %}
+    <a href="{% url 'car_filter' %}">Zmień filrty wyszukiwania</a>
 
 {% endblock %}

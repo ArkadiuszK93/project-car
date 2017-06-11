@@ -42,5 +42,5 @@ class Samochod(models.Model):
 	cena =  models.IntegerField()
 	uzytkownik = models.ForeignKey(Uzytkownik)
 	def __str__(self):
-	    return self.marka.nazwa + ' ' + self.model
+	    return self.marka.nazwa + ' ' + self.model 
 
