@@ -2,8 +2,23 @@
 {% block content %}
 
 
-<p>Witaj w salonie samochodów używanych</p>
 
+
+{% if not user.is_authenticated %}
+<h2>Witaj salonie samochodów używanych</h2>
+<p style="font-size:15pt;"> Aby przeglądać dostępne samochody skorzystaj z wyszukiwarki <a href="{% url 'car_filter' %}">klik</a></p>
+<p style="font-size:15pt;"> Aby dodać ogłoszenie musisz być zalogowany! Załóż nowe konto tutaj <a href="{% url 'register' %}">klik</a> </br>
+lub zaloguj się do istniejącego konta <a href="{% url 'login' %}">klik</a> </p>
+{%else%}
+{% if not user.is_superuser%}
+<h2>Witaj <b>{{user.username}}</b> w salonie samochodów używanych</h2>
+<p style="font-size:15pt;"> Aby przeglądać dostępne samochody skorzystaj z wyszukiwarki <a href="{% url 'car_filter' %}">klik</a></p>
+<p style="font-size:15pt;"> Aby dodać nowe ogłoszenie przejdź do formularza <a href="{% url 'car_add' %}">klik</a></p>
+<p style="font-size:15pt;"> Możesz sprawdzić oraz edytować dane konta oraz wystawionych aukcji tutaj <a href="{% url 'user_details' %}">klik</a></p>
+{%else%}
+<h2>Zalogowany jako admin: <b>{{user.username}}</b></h2>
+{%endif%}
+{%endif%}
 
 
 

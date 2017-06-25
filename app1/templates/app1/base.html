@@ -7,14 +7,14 @@
         <link rel="stylesheet" href="{% static 'css/test.css' %}">
 
     </head>
-    <body>
+    <body style="background-image: linear-gradient(90deg, #FFFFFF,  #c9bfc8 );"s>
         <div class="page-header">
              {% if user.is_authenticated %}
               {% if not user.is_superuser%}
             <a href="{% url 'user_details' %}" class="top-menu">{{user.username}} <span class="glyphicon glyphicon-paperclip">  </a>
              {%endif%}
               {%endif%}
-            <h1><a href="{% url 'test' %}">Salon samochodów używanych</a></h1>
+            <h1><a href="{% url 'index' %}">Salon samochodów używanych</a></h1>
         </div>
 <div id="menu">
  <nav class="navbar navbar-inverse">
@@ -22,13 +22,17 @@
     <ul class="nav navbar-nav">
       <li><a href="{% url 'index' %}" >Home</a></li>
       <li><a href="{% url 'car_filter' %}">Wyszukaj</a></li>
-       {% if user.is_authenticated %}
+            {% if user.is_authenticated %}
+            {% if not user.is_superuser%}
       <li><a href="{% url 'car_add' %}">Dodaj ogłoszenie</a></li>
+      {%else%}
+       <li><a href="{% url 'marka_add' %}">Dodaj Markę</a></li>
+      {%endif%}
       {%endif%}
     </ul>
     <ul class="nav navbar-nav navbar-right">
-      <li><a href="#"><span class="glyphicon glyphicon-user"></span> Zarejestruj</a></li>
-        {% if not user.is_authenticated %}
+            {% if not user.is_authenticated %}
+      <li><a href="{% url 'register' %}"><span class="glyphicon glyphicon-user"></span> Zarejestruj</a></li>
       <li><a href="{% url 'login' %}"><span class="glyphicon glyphicon-log-in"></span> Zaloguj</a></li>
       {%else%}
         <li><a href="{% url 'logout' %}"><span class="glyphicon glyphicon-log-out"></span> Wyloguj</a></li>

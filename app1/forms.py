@@ -1,6 +1,6 @@
 from django import forms
-
 from .models import Samochod,Marka,Uzytkownik
+from django.contrib.auth.models import User
 
 class CarForm(forms.ModelForm):
     class Meta:
@@ -9,10 +9,40 @@ class CarForm(forms.ModelForm):
         labels = {
 			"moc": "Moc[KM]","pojemnosc":"Pojemnosc[cm3]","przebieg":"Przebieg[km]","cena":"Cena[zl]","paliwo":"Rodzaj paliwa","nadwozie":"Typ nadwozia"
 		}
+
 class UserForm(forms.ModelForm):
     class Meta:
         model = Uzytkownik
         exclude = ['user']
+
+class UserCreateForm(forms.Form):
+    login = forms.CharField( max_length=18,required=True)
+    haslo = forms.CharField(max_length=20,min_length=4 ,required=True,widget=forms.PasswordInput())
+    haslo_powtorz = forms.CharField(label="Powtórz hasło",max_length=20,min_length=4 ,required=True,widget=forms.PasswordInput())
+    imie = forms.CharField( max_length=20,required=False)
+    nazwisko = forms.CharField( max_length=25,required=False)
+    telefon = forms.IntegerField(required=True)
+    def clean(self):
+        haslo = self.cleaned_data.get('haslo')
+        haslo_powtorz = self.cleaned_data.get('haslo_powtorz')
+        login = self.cleaned_data.get('login')
+
+        try:
+            user = User.objects.get(username=login)
+        except Exception as e:
+            user = None
+
+        if user != None:
+             raise forms.ValidationError("Podana nazwa użytkownika jest już zajęta")
+
+
+        if haslo != haslo_powtorz:
+            raise forms.ValidationError("Hasła muszą się zgadzać")
+
+        return self.cleaned_data
+
+
+
 
 class FilterForm(forms.Form):
 	iquery = Samochod.objects.order_by().values_list('marka', flat=True).distinct()
@@ -35,3 +65,11 @@ class FilterForm(forms.Form):
         #if not subject and not subject1:
             #raise forms.ValidationError('Subject field is required.')
 		return self.cleaned_data
+
+class MarkaForm(forms.ModelForm):
+    class Meta:
+        model = Marka
+        fields = ('nazwa','kraj_pochodzenia')
+        labeles = {
+            'kraj_pochodzenia': 'Kraj pochodzenia'
+            }

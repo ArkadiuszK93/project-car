@@ -1,7 +1,8 @@
 from django.shortcuts import render,get_object_or_404
 from django.http import HttpResponse
 from .models import Samochod,Uzytkownik
-from .forms import CarForm,FilterForm,UserForm
+from django.contrib.auth.models import User
+from .forms import CarForm,FilterForm,UserForm,MarkaForm,UserCreateForm
 from django.shortcuts import redirect
 import pdb
 #pdb.set_trace()
@@ -33,16 +34,19 @@ def car_add(request):
         return render(request,'app1/car_add.html',{'form':form})
 
 def car_edit(request, pk):
-	car = get_object_or_404(Samochod, pk=pk)
-	if request.method == "POST":
-		form = CarForm(request.POST, instance=car)
-		if form.is_valid():
-			car = form.save(commit=False)
-			car.save()
-			return redirect('user_details')
-	else:
-		form = CarForm(instance=car)
-		return render(request, 'app1/car_edit.html', {'form': form})
+    car = get_object_or_404(Samochod, pk=pk)
+    if car.uzytkownik.user.username == request.user.username:
+        if request.method == "POST":
+            form = CarForm(request.POST, instance=car)
+            if form.is_valid():
+                car = form.save(commit=False)
+                car.save()
+                return redirect('user_details')
+        else:
+            form = CarForm(instance=car)
+            return render(request, 'app1/car_edit.html', {'form': form})
+    else:
+            return redirect('user_details')
 
 def car_remove(request, pk):
     car = get_object_or_404(Samochod, pk=pk)
@@ -111,3 +115,32 @@ def user_details(request):
         form = UserForm(instance=user)
         return render(request,'app1/user_details.html', {'u': form,'cars': lista})
     #return render(request,'app1/user_details.html', {'u': user})
+
+def marka_add(request):
+    if request.method == "POST":
+        form = MarkaForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('index')
+    else:
+        form = MarkaForm()
+        return render (request,'app1/marka_add.html',{ 'marka': form })
+
+def register(request):
+    if request.method == "POST":
+        form = UserCreateForm(request.POST)
+        if form.is_valid():
+            user = User(username=form.cleaned_data['login'])
+            user.set_password(form.cleaned_data['haslo'])
+            user.save()
+            uzytk = Uzytkownik(Imie=form.cleaned_data['imie'],Nazwisko= form.cleaned_data['nazwisko'],telefon=form.cleaned_data['telefon'],user=user)
+            uzytk.save()
+           #haslo = form.cleaned_data['haslo']
+            #haslo2 = form.cleaned_data['haslo_powtorz']
+            return redirect('login')
+        else:
+            return render(request,'registration/register.html',{'form':form,'error':form.errors})
+    else:
+        form = UserCreateForm()
+        return render(request,'registration/register.html',{'form':form,'error':form.errors})
+
